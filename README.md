@@ -1,8 +1,8 @@
-# The Power Augmented Lagrangian Method
+# The Power Proximal Point and Augmented Lagrangian Method
 
 This repository contains the code to reproduce the numerical experiments in
 
-> CITE ARXIV / PAPER
+> Oikonomidis A. Konstantinos, Bodard Alexander, Laude Emanuel, Patrinos Panagiotis. [Power Proximal Point and Augmented Lagrangian Method](https://arxiv.org/abs/2312.12205).
 
 # Results
 
