@@ -94,7 +94,7 @@ def run(m, n, cond = 100, seed = None):
         norm2 = False
     )
 
-    x_alm = alm_power.solve(np.copy(x0), f_ref = f.eval(x_qpsolve), inner_tol=lambda i: 1e1 / np.power(i, q))
+    x_alm = alm_power.solve(np.copy(x0), f_ref = f.eval(x_qpsolve), inner_tol=lambda i: 1e-1 / np.power(i, q))
 
     print(np.abs(f.eval(x_alm) - f.eval(x_qpsolve)))
     print(np.linalg.norm(x_alm - x_qpsolve))
@@ -121,7 +121,7 @@ def run(m, n, cond = 100, seed = None):
         should_update_sigma=False
     )
 
-    x_alm = alm_classical.solve(np.copy(x0), f_ref = f.eval(x_qpsolve), inner_tol = lambda i: 1e-6 / np.power(i, q))
+    x_alm = alm_classical.solve(np.copy(x0), f_ref = f.eval(x_qpsolve), inner_tol = lambda i: 1e-3 / np.power(i, q))
 
     print(np.abs(f.eval(x_alm) - f.eval(x_qpsolve)))
     print(np.linalg.norm(x_alm - x_qpsolve))
@@ -140,7 +140,7 @@ def run(m, n, cond = 100, seed = None):
         m,
         n,
         maxit = maxit,
-        sigma = 100,
+        sigma = 250,
         tol = 1e-6,
         inner_solver=InnerSolver.BFGS_SCIPY,
         logging = False,
@@ -148,7 +148,7 @@ def run(m, n, cond = 100, seed = None):
         should_update_sigma=True
     )
 
-    x_alm = alm_classical.solve(np.copy(x0), f_ref = f.eval(x_qpsolve), inner_tol = lambda i: 1e-6 / np.power(i, q))
+    x_alm = alm_classical.solve(np.copy(x0), f_ref = f.eval(x_qpsolve), inner_tol = lambda i: 1e-2 / np.power(i, q))
 
     print(np.abs(f.eval(x_alm) - f.eval(x_qpsolve)))
     print(np.linalg.norm(x_alm - x_qpsolve))
@@ -169,7 +169,7 @@ for mn_i, mn in enumerate(mn_list):
     m, n = mn
     lbfgsb_iters = np.zeros((N, n_solvers))
     for i in range(N):
-        lbfgsb_iters[i, :] = run(m, n, cond=1000)
+        lbfgsb_iters[i, :] = run(m, n, cond=100)
     mn_iters[mn_i, 0] = np.median(lbfgsb_iters, axis=0)[0]
     mn_iters[mn_i, 1] = np.percentile(lbfgsb_iters, 95, axis=0)[0]
     mn_iters[mn_i, 2] = np.median(lbfgsb_iters, axis=0)[1]

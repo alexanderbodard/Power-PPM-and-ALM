@@ -165,14 +165,12 @@ class PowerALM:
                 self.problem.G.T @ np.diag(Lmod) @ self.problem.G * self.sigma
 
     def update_sigma(self, x, ek):
-        if self.problem.A is not None and np.linalg.norm(np.maximum(0., self.problem.eq_res(x))) < ek:
-            ek *= .5
+        if self.problem.A is not None and np.linalg.norm(np.maximum(0., self.problem.eq_res(x))) > .5 * ek:
             self.sigma *= 2.
-        elif self.problem.G is not None and np.linalg.norm(np.maximum(0., self.problem.ineq_res(x))) < ek:
-            ek *= .5
+        elif self.problem.G is not None and np.linalg.norm(np.maximum(0., self.problem.ineq_res(x))) > .5 * ek:
             self.sigma *= 2.
-            
-        return ek
+
+        self.sigma = min(self.sigma, 1e9)
 
     def solve(self, x0, f_ref=None, verbose=True, inner_tol = None):
         x = np.copy(x0)
@@ -244,7 +242,11 @@ class PowerALM:
             eta = np.maximum(0., eta + self.primal_grad_norm_pow(self.problem.ineq_res(x)) * self.sigma)
 
             if self.should_update_sigma:
-                ek = self.update_sigma(x, ek)
+                self.update_sigma(x, ek)
+                if self.problem.A is not None:
+                    ek = np.linalg.norm(self.problem.eq_res(x))
+                elif self.problem.G is not None:
+                    ek = np.linalg.norm(self.problem.ineq_res(x))
 
             total_nit += nit
             self.total_nit = total_nit
