@@ -111,7 +111,7 @@ def make_plots(logs, plot_path, block_final = False):
         plt.semilogy(total_nits[inner_solver], f_error[inner_solver], marker = markers[sigma_index], linestyle=linestyles[p_index], label=inner_solver, color = colormap(1. * i / N))
     plt.xlabel('# LBFGS inner iterations')
     plt.ylabel(r'$\vert f - f^* \vert$')
-    plt.legend()
+    plt.legend([r'$q = 0.5$', r'$q = 1$', r'$q = 1$' + ', adaptive']) # Hardcode cleaner legend
     plt.savefig(plot_path + "/ferror_total.pdf")
     plt.show(block=should_block)
 
@@ -122,7 +122,7 @@ def make_plots(logs, plot_path, block_final = False):
         plt.semilogy(total_nits[inner_solver], const_viol[inner_solver], marker = markers[sigma_index], linestyle=linestyles[p_index], label=inner_solver, color = colormap(1. * i / N))
     plt.xlabel('# LBFGS inner iterations')
     plt.ylabel('Constraint violation')
-    plt.legend()
+    plt.legend([r'$q = 0.5$', r'$q = 1$', r'$q = 1$' + ', adaptive']) # Hardcode legend legend
     plt.savefig(plot_path + "/constviol_total.pdf")
     plt.show(block=block_final)
 
