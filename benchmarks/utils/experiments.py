@@ -1,5 +1,11 @@
 from abc import ABC, abstractmethod
 
+# Add the root folder to the path
+import sys
+import os
+relative_path = os.path.dirname(os.path.realpath(__file__))
+sys.path.append(relative_path + "/../../")
+
 import numpy as np
 import power_alm.functions as fun
 import power_alm.inner_solver as optim
