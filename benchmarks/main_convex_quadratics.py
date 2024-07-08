@@ -249,21 +249,21 @@ for config in configs:
     ]
 
     experiment = ConvexQuadratics(name, config, optimizer_configs, num_runs)
-    experiment.run(overwrite_file=True)
+    experiment.run(overwrite_file=False)
 
     if num_runs > 1:
         experiment.compute_grid()
 
     matplotlib.rcParams['mathtext.fontset'] = 'cm'
-    matplotlib.rcParams.update({'font.size': 20})
-    matplotlib.rcParams.update({'legend.fontsize': 18})
+    # matplotlib.rcParams.update({'font.size': 20})
+    # matplotlib.rcParams.update({'legend.fontsize': 18})
     fig, ax = plt.subplots(figsize=(6, 5))
-    # ax.set_xticks([]); ax.set_yticks([])
+    ax.set_xticks([]); ax.set_yticks([])
     plt.xticks(fontsize=10); plt.yticks(fontsize=10)
     # fig.suptitle("$m=" + str(config["m"]) + "$, " +
-                #  "$n=" + str(config["n"]) + "$, ", fontsize=16)
+    #              "$n=" + str(config["n"]) + "$, ", fontsize=16)
     ax.grid(True)
-    experiment.plot(markevery=config["markevery"], PLOT_TOTAL_NIT=True, SINGLE_PLOT=True, run = 0, xlabels = [""], ylabels=[""])
+    experiment.plot(markevery=config["markevery"], PLOT_TOTAL_NIT=True, SINGLE_PLOT=False, run = 0)
 
     filename = experiment.get_filename()
     suffix = ".pdf"

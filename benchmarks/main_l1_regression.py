@@ -240,15 +240,15 @@ for config in configs:
     experiment = L1Regression(name, config, optimizer_configs, num_runs)
     experiment.run(overwrite_file=False)
     matplotlib.rcParams['mathtext.fontset'] = 'cm'
-    matplotlib.rcParams.update({'font.size': 20})
-    matplotlib.rcParams.update({'legend.fontsize': 18})
+    # matplotlib.rcParams.update({'font.size': 20})
+    # matplotlib.rcParams.update({'legend.fontsize': 18})
     fig, ax = plt.subplots(figsize=(6, 5))
-    # ax.set_xticks([]); ax.set_yticks([])
+    ax.set_xticks([]); ax.set_yticks([])
     plt.xticks(fontsize=10); plt.yticks(fontsize=10)
     # fig.suptitle("$m=" + str(config["m"]) + "$, " +
                 #  "$n=" + str(config["n"]) + "$, ", fontsize=16)
     ax.grid(True)
-    experiment.plot(markevery=config["markevery"], SINGLE_PLOT=True, xlabels = [""], ylabels=[""])
+    experiment.plot(markevery=config["markevery"], SINGLE_PLOT=False)
 
     filename = experiment.get_filename()
     suffix = ".pdf"
