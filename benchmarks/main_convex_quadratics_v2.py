@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib
-import experiments
+import utils.experiments as experiments
 
 import power_alm.functions as fun
 import power_alm.inner_solver as optim

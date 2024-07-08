@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib
-import experiments
+import utils.experiments as experiments
 
 import power_alm.functions as fun
 import power_alm.inner_solver as optim
@@ -9,7 +9,7 @@ import power_alm.solver as solver
 import power_alm.problems as problems
 import power_alm.alm as alm
 
-import linear_problem_generator as gen
+import utils.linear_problem_generator as gen
 
 """
 This experiment considers LPs with linear INEQUALITY constraints.
